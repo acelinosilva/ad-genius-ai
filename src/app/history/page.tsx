@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
+import { createBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { Zap, LayoutDashboard, History, Settings, LogOut, Copy, ShoppingBag, Loader2, Calendar, MessageSquare } from "lucide-react";
 import Link from "next/link";
@@ -10,6 +10,10 @@ export default function HistoryPage() {
     const [ads, setAds] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const router = useRouter();
+    const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
 
     useEffect(() => {
         const fetchAds = async () => {

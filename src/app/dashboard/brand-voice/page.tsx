@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
+import { createBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { LayoutDashboard, History, Settings, LogOut, Save, MessageSquare, Sparkles, Loader2, Zap } from "lucide-react";
 import Link from "next/link";
@@ -17,6 +17,10 @@ export default function BrandVoice() {
     const [brandArchetype, setBrandArchetype] = useState("preposto");
 
     const router = useRouter();
+    const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
 
     useEffect(() => {
         const getData = async () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
+import { createBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { Zap, LayoutDashboard, History, Settings, LogOut, Users, Search, Edit3, Save, X, Loader2, ShieldAlert, CreditCard, Star } from "lucide-react";
 import Link from "next/link";
@@ -20,6 +20,10 @@ export default function AdminPage() {
     const [editPlan, setEditPlan] = useState<string>("free");
 
     const router = useRouter();
+    const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
 
     useEffect(() => {
         const checkAdmin = async () => {
@@ -211,8 +215,8 @@ export default function AdminPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${u.plan === 'agencia' ? 'bg-[#22c55e]/20 text-[#22c55e] border border-[#22c55e]/20' :
-                                                    u.plan === 'profissional' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/20' :
-                                                        'bg-white/5 text-slate-500 border border-white/10'
+                                                u.plan === 'profissional' ? 'bg-blue-500/20 text-blue-400 border border-blue-500/20' :
+                                                    'bg-white/5 text-slate-500 border border-white/10'
                                                 }`}>
                                                 {u.plan}
                                             </span>
