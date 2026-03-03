@@ -10,6 +10,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || 'sk_placeholder', {
 export async function POST(req: Request) {
     try {
         const { planId } = await req.json();
+        console.log("Checkout Request for Plan:", planId);
+
+        if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY === 'sk_placeholder') {
+            console.error("ERRO: STRIPE_SECRET_KEY não configurada corretamente na Vercel.");
+            return NextResponse.json({ error: "Configuração do servidor incompleta (Stripe Key)" }, { status: 500 });
+        }
+
         const cookieStore = await cookies();
 
         const supabase = createServerClient(
@@ -30,15 +37,19 @@ export async function POST(req: Request) {
             }
         );
 
-        const { data: { user } } = await supabase.auth.getUser();
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
 
-        if (!user) {
-            return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
+        if (authError || !user) {
+            console.error("Erro de Autenticação no Checkout:", authError);
+            return NextResponse.json({ error: "Não autorizado ou sessão expirada" }, { status: 401 });
         }
+
+        console.log("Usuário autenticado:", user.email);
 
         const unitAmount = planId === "profissional" ? 4900 : 9700;
         const planName = planId === "profissional" ? "Plano Profissional" : "Plano Agência";
 
+        console.log("Criando sessão do Stripe...");
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card", "boleto"],
             line_items: [
@@ -67,9 +78,10 @@ export async function POST(req: Request) {
             },
         });
 
+        console.log("Sessão Stripe criada com sucesso:", session.id);
         return NextResponse.json({ sessionId: session.id, url: session.url });
     } catch (err: any) {
-        console.error("Stripe Error:", err);
+        console.error("Stripe Checkout Error:", err);
         return NextResponse.json({ error: err.message }, { status: 500 });
     }
 }
