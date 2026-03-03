@@ -4,7 +4,7 @@ import { createServerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: "2023-10-16", // Reverting to a more stable version unless user strictly needs 2026
+    apiVersion: "2026-02-25.clover",
 });
 
 export async function POST(req: Request) {

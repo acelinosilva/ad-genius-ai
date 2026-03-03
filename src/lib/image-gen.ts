@@ -20,7 +20,11 @@ export async function generateAdImage(prompt: string) {
             quality: "standard",
         });
 
-        return response.data[0].url;
+        if (!response || !response.data || response.data.length === 0) {
+            throw new Error("Failed to generate image: Empty response from OpenAI");
+        }
+        const imageUrl = response.data[0].url;
+        return imageUrl;
     } catch (error) {
         console.error("Erro na geração de imagem DALL-E:", error);
         return null;

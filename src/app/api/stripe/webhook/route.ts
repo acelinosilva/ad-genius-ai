@@ -4,7 +4,7 @@ import Stripe from "stripe";
 import { createClient } from "@supabase/supabase-js";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: "2023-10-16",
+    apiVersion: "2026-02-25.clover",
 });
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!;
@@ -17,7 +17,8 @@ const supabaseAdmin = createClient(
 
 export async function POST(req: Request) {
     const body = await req.text();
-    const signature = headers().get("stripe-signature")!;
+    const headerList = await headers();
+    const signature = headerList.get("stripe-signature")!;
 
     let event: Stripe.Event;
 
@@ -43,7 +44,7 @@ export async function POST(req: Request) {
                 stripe_subscription_id: session.subscription as string,
                 status: subscription.status,
                 plan_id: planId,
-                current_period_end: new Date(subscription.current_period_end * 1000).toISOString(),
+                current_period_end: new Date((subscription.items.data[0].current_period_end as number) * 1000).toISOString(),
             });
 
             // 2. Update Profile credits
