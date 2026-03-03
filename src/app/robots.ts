@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: ['/dashboard/', '/api/', '/admin/', '/settings/'],
         },
-        sitemap: 'https://adgenius-ai.vercel.app/sitemap.xml',
+        sitemap: 'https://ad-genius-ai-eta-vercel.app/sitemap.xml',
     };
 }

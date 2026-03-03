@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://adgenius-ai.vercel.app"), // Fallback base URL for metadata
+  metadataBase: new URL("https://ad-genius-ai-eta.vercel.app"), // Corrected base URL
   alternates: {
     canonical: "/",
   },
