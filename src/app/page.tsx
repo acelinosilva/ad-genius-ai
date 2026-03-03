@@ -38,7 +38,7 @@ export default function Home() {
               <Zap size={14} /> Novo: IA de Alto Desempenho
             </div>
             <h1 className="text-5xl md:text-7xl font-outfit font-extrabold leading-[1.1] mb-8 tracking-tight">
-              Domine o Marketplace com Anúncios Projetados para <span className="text-[#22c55e]">Vender em Segundos.</span>
+              Gerador de Anúncios com IA: Criar Anúncios para <span className="text-[#22c55e]">OLX e Mercado Livre em Segundos.</span>
             </h1>
             <p className="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8 leading-relaxed font-medium">
               A inteligência artificial que entende o SEO da OLX, ML e Shopee. Gere textos persuasivos, evite bloqueios e multiplique seus lucros agora.
@@ -139,8 +139,8 @@ export default function Home() {
         <section id="features" className="py-32 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20 reveal">
-              <h2 className="text-4xl md:text-5xl font-outfit font-extrabold mb-6 tracking-tight">Ferramentas projetadas para o<br /><span className="text-[#22c55e]">seu sucesso contínuo.</span></h2>
-              <p className="text-lg text-slate-400 max-w-2xl mx-auto font-medium">Tudo o que você precisa para dominar o marketplace e vender em tempo recorde.</p>
+              <h2 className="text-4xl md:text-5xl font-outfit font-extrabold mb-6 tracking-tight">Gerador de Anúncios Profissionais para<br /><span className="text-[#22c55e]">OLX, Mercado Livre e Shopee.</span></h2>
+              <p className="text-lg text-slate-400 max-w-2xl mx-auto font-medium">As melhores ferramentas de copywriting com IA para dominar o marketplace brasileiro.</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8 reveal [animation-delay:100ms]">
@@ -153,7 +153,7 @@ export default function Home() {
                 { icon: <Zap className="text-[#22c55e]" />, title: "Geração em 8 seg.", desc: "Sua produtividade multiplicada pelo poder da IA generativa de última geração." }
               ].map((feature, i) => (
                 <div key={i} className="glass-card p-10 rounded-2xl border border-white/5 hover:border-[#22c55e]/20 transition-all hover:emerald-glow group">
-                  <div className="w-14 h-14 bg-[#22c55e]/10 rounded-xl flex items-center justify-center mb-8 border border-[#22c55e]/20 group-hover:scale-110 transition-transform">
+                  <div className="w-14 h-14 bg-[#22c55e]/10 rounded-xl flex items-center justify-center mb-8 border border-[#22c55e]/20 group-hover:scale-110 transition-transform" aria-label={feature.title}>
                     {feature.icon}
                   </div>
                   <h3 className="text-xl font-bold mb-4 font-outfit">{feature.title}</h3>
@@ -337,8 +337,8 @@ export default function Home() {
         <section id="help" className="py-32 px-6 bg-slate-950/20">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-20 reveal">
-              <h2 className="text-4xl md:text-5xl font-outfit font-extrabold mb-6 tracking-tight">Perguntas <span className="text-[#22c55e]">Frequentes</span></h2>
-              <p className="text-lg text-slate-400 font-medium">Tudo o que você precisa saber para começar a escalar suas vendas.</p>
+              <h2 className="text-4xl md:text-5xl font-outfit font-extrabold mb-6 tracking-tight">Perguntas Frequentes sobre <span className="text-[#22c55e]">Vendas com IA</span></h2>
+              <p className="text-lg text-slate-400 font-medium">Tudo o que você precisa saber para começar a usar nosso gerador de anúncios grátis.</p>
             </div>
 
             <div className="space-y-4">
