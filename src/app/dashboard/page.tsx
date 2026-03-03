@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase";
+import { createBrowserClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { Zap, LayoutDashboard, History, Settings, LogOut, Copy, RefreshCw, ShoppingBag, ArrowRight, Loader2, Sparkles, ChevronRight, Target, CheckCircle2, AlertCircle, ShieldAlert } from "lucide-react";
 import Link from "next/link";
@@ -27,6 +27,10 @@ export default function Dashboard() {
     const [generatedAdB, setGeneratedAdB] = useState<any>(null);
     const [printingAd, setPrintingAd] = useState<any>(null);
     const router = useRouter();
+    const supabase = createBrowserClient(
+        process.env.NEXT_PUBLIC_SUPABASE_URL!,
+        process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
 
     const platformLimits: any = {
         olx: { title: 60, desc: 2000 },
